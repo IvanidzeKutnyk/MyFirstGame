@@ -1,9 +1,10 @@
 #include "pch.h"
 #include "Window.h"
 #include <chrono>
-
+#define Right_Side
 
 Rectang rec;
+Triang tr(300, 0, 0, 0.2, 0.3, 0.9);
 
 Window::Windows_WindowClass Window::Windows_WindowClass::_windowClass;
 
@@ -95,9 +96,9 @@ Window::~Window()
 ///Rectangle
 void Window::MoveRec(Rectang& _rec) {
 	FillInColor(Color(0.1, 0.8, 0.6));
-	if (CheckSize(_rec, _rec._x, _rec._y, 1024, 500))
+	if (CheckSizeR(_rec, _rec._x, _rec._y, 1024, 500))
 	{
-		GetLast(_rec);
+		GetLastR(_rec);
 	}
 	else {
 
@@ -114,14 +115,14 @@ void Window::MoveRec(Rectang& _rec) {
 		_rec._y++;
 	}
 }
-bool Window::CheckSize(Rectang& _rec, int _x, int _y, int _w, int _h) {
+bool Window::CheckSizeR(Rectang& _rec, int _x, int _y, int _w, int _h) {
 	if (_y + _rec.height == (_h - 1) || _x + _rec.weight == (_w - 1))
 	{
 		return true;
 	}
 	else { return false; }
 }
-void Window::GetLast(Rectang& _rec) {
+void Window::GetLastR(Rectang& _rec) {
 	for (int i = 0; i < _rec.height; i++)
 	{
 		for (int j = 0; j < _rec.weight; j++)
@@ -130,6 +131,92 @@ void Window::GetLast(Rectang& _rec) {
 			this->_mColorBuffer[_rec._y + i][_rec._x + j].G = _rec.G;
 			this->_mColorBuffer[_rec._y + i][_rec._x + j].B = _rec.B;
 		}
+	}
+};
+///Triangle
+////Equilateral
+void Window::MoveTr_e(Triang& _tr) {
+	FillInColor(Color(0.1, 0.8, 0.6));
+	if (CheckSizeT(_tr, _tr.Get_x(), _tr.Get_y(), 1024, 500))
+	{
+		GetLastT(_tr);
+	}
+	else {
+		//Left_Side
+		float _temp1 = _tr.Get_iA() / 2;
+		for (int i = 0; i < _tr.Get_height(); i++)
+		{
+			if (_temp1 == 0)
+			{
+				break;
+			}
+			for (int j = _tr.Get_iA() / 2; j > _temp1; j--)
+			{
+				this->_mColorBuffer[_tr.Get_y() + i][_tr.Get_x() + j].R = _tr.Get_R();
+				this->_mColorBuffer[_tr.Get_y() + i][_tr.Get_x() + j].G = _tr.Get_G();
+				this->_mColorBuffer[_tr.Get_y() + i][_tr.Get_x() + j].B = _tr.Get_B();
+			}
+			_temp1--;
+		}
+#	//Right_Side
+		float _temp = _tr.Get_iA() / 2;
+		for (int i = 0; i < _tr.Get_height(); i++)
+		{
+			if (_temp == _tr.Get_iA())
+			{
+				break;
+			}
+			for (int j = _tr.Get_iA() / 2; j < _temp; j++)
+			{
+				this->_mColorBuffer[_tr.Get_y() + i][_tr.Get_x() + j].R = _tr.Get_R();
+				this->_mColorBuffer[_tr.Get_y() + i][_tr.Get_x() + j].G = _tr.Get_G();
+				this->_mColorBuffer[_tr.Get_y() + i][_tr.Get_x() + j].B = _tr.Get_B();
+			}
+			_temp++;
+		}
+		_tr.Plus_X();
+		_tr.Plus_Y();
+	}
+};
+bool Window::CheckSizeT(Triang& _tr, int _x, int _y, int _w, int _h) {
+	if (_y + _tr.Get_iA() == (_h - 1) || _x + _tr.Get_height() == (_w - 1))
+	{
+		return true;
+	}
+	else { return false; }
+}
+void Window::GetLastT(Triang& _tr) {
+	//Left_Side
+	float _temp1 = _tr.Get_iA() / 2;
+	for (int i = 0; i < _tr.Get_height(); i++)
+	{
+		if (_temp1 == 0)
+		{
+			break;
+		}
+		for (int j = _tr.Get_iA() / 2; j > _temp1; j--)
+		{
+			this->_mColorBuffer[_tr.Get_y() + i][_tr.Get_x() + j].R = _tr.Get_R();
+			this->_mColorBuffer[_tr.Get_y() + i][_tr.Get_x() + j].G = _tr.Get_G();
+			this->_mColorBuffer[_tr.Get_y() + i][_tr.Get_x() + j].B = _tr.Get_B();
+		}
+		_temp1--;
+	}
+#	//Right_Side
+	float _temp = _tr.Get_iA() / 2;
+	for (int i = 0; i < _tr.Get_height(); i++)
+	{
+		if (_temp == _tr.Get_iA())
+		{
+			break;
+		}
+		for (int j = _tr.Get_iA() / 2; j < _temp; j++)
+		{
+			this->_mColorBuffer[_tr.Get_y() + i][_tr.Get_x() + j].R = _tr.Get_R();
+			this->_mColorBuffer[_tr.Get_y() + i][_tr.Get_x() + j].G = _tr.Get_G();
+			this->_mColorBuffer[_tr.Get_y() + i][_tr.Get_x() + j].B = _tr.Get_B();
+		}
+		_temp++;
 	}
 };
 //End My CoDE
@@ -183,7 +270,8 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		HDC hdc = BeginPaint(hWnd, &ps);
 
 		//CODE
-		MoveRec(rec);
+		//MoveRec(rec);
+		MoveTr_e(tr);
 		//CODE
 			// don`t touch THIS!!!
 		this->DrawWindow(hdc);

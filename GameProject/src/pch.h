@@ -13,3 +13,4 @@
 #include "Figures/Rectangle.h"
 #include "Figures/Triangle.h"
 #include "GameMath/Color.h"
+#include <math.h>
