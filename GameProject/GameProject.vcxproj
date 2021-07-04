@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application\Window.cpp" />
+    <ClCompile Include="src\Figures\Ellipse.cpp" />
     <ClCompile Include="src\Figures\Rectangle.cpp" />
     <ClCompile Include="src\Figures\Triangle.cpp" />
     <ClCompile Include="src\GameMath\Color.cpp" />
@@ -35,6 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application\Window.h" />
+    <ClInclude Include="src\Figures\Ellipse.h" />
     <ClInclude Include="src\Figures\Rectangle.h" />
     <ClInclude Include="src\Figures\Triangle.h" />
     <ClInclude Include="src\GameMath\Color.h" />

@@ -14,3 +14,4 @@
 #include "Figures/Triangle.h"
 #include "GameMath/Color.h"
 #include <math.h>
+#include "Figures/Ellipse.h"

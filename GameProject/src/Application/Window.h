@@ -34,14 +34,18 @@ public:
 	void initGame();
 	int start();
 public:
+
 	// Rectangle
 	void MoveRec(Rectang& _rec);
 	bool CheckSizeR(Rectang& _rec, int _x, int _y, int _w, int _h);
 	void GetLastR(Rectang& _rec);
+
 	// Triangle_Equilateral
 	void MoveTr_e(Triang& _tr);
 	bool CheckSizeT(Triang& _tr, int _x, int _y, int _w, int _h);
 	void GetLastT(Triang& _tr);
+
+	void All_F(bool _a, ellipse& el);
 private:
 	int _mWidth;
 	int _mHeight;

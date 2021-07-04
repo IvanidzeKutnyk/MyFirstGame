@@ -1,10 +1,11 @@
 #include "pch.h"
 #include "Window.h"
 #include <chrono>
-#define Right_Side
 
 Rectang rec;
-Triang tr(300, 0, 0, 0.2, 0.3, 0.9);
+Triang tr(40, 0, 0, 0.2, 0.3, 0.9);
+ellipse ell;
+char buff[100];
 
 Window::Windows_WindowClass Window::Windows_WindowClass::_windowClass;
 
@@ -136,6 +137,7 @@ void Window::GetLastR(Rectang& _rec) {
 ///Triangle
 ////Equilateral
 void Window::MoveTr_e(Triang& _tr) {
+	_tr.Set_height(_tr.Get_iA());
 	FillInColor(Color(0.1, 0.8, 0.6));
 	if (CheckSizeT(_tr, _tr.Get_x(), _tr.Get_y(), 1024, 500))
 	{
@@ -176,6 +178,7 @@ void Window::MoveTr_e(Triang& _tr) {
 		}
 		_tr.Plus_X();
 		_tr.Plus_Y();
+	
 	}
 };
 bool Window::CheckSizeT(Triang& _tr, int _x, int _y, int _w, int _h) {
@@ -183,7 +186,10 @@ bool Window::CheckSizeT(Triang& _tr, int _x, int _y, int _w, int _h) {
 	{
 		return true;
 	}
-	else { return false; }
+	else { 
+		return false; }
+	
+
 }
 void Window::GetLastT(Triang& _tr) {
 	//Left_Side
@@ -219,6 +225,29 @@ void Window::GetLastT(Triang& _tr) {
 		_temp++;
 	}
 };
+
+void Window::All_F(bool _a, ellipse& el){
+	if (_a == true) {
+		FillInColor(Color(1,1,1));
+		for (int i = 0; i < el.Get_R() * 2; i++)
+		{
+			for (int j = 0; j < el.Get_R() * 2; j++)
+			{
+				if (sqrt(pow(el.Get_R() - i, 2) + pow(el.Get_R() - j, 2)) <= el.Get_R()
+					|| j == el.Get_R() || i == el.Get_R())
+				{
+					this->_mColorBuffer[el._y + i][el._x + j].R = el.r;
+					this->_mColorBuffer[el._y + i][el._x + j].R = el.g;
+					this->_mColorBuffer[el._y + i][el._x + j].R = el.b;
+				}
+				//else {this->_mColorBuffer[el._y + i][el._x + j].R = 0.98f;}
+			}
+
+		}
+		//el._x++;
+		//el._y++;
+	}
+}
 //End My CoDE
 int Window::start()
 {
@@ -254,26 +283,32 @@ LRESULT CALLBACK Window::HandleMsgThunk(HWND hWnd, UINT msg, WPARAM wParam, LPAR
 
 LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+	//snprintf(buff, sizeof(buff), "%s", msg);
 	switch (msg)
 	{
 	case WM_CREATE:
 		SetTimer(hWnd, 1, 20, NULL);
 		break;
-
+	case WM_KEYDOWN:
+		if (wParam == VK_TAB)
+		{
+			ell.Update(false, false, 1, false, 10);
+		}
+		
+		break;
 	case WM_TIMER:
 		InvalidateRect(hWnd, NULL, FALSE);
 		break;
-
 	case WM_PAINT:
 	{
 		PAINTSTRUCT ps;
 		HDC hdc = BeginPaint(hWnd, &ps);
-
+		
 		//CODE
 		//MoveRec(rec);
-		MoveTr_e(tr);
+		//MoveTr_e(tr);
+		All_F(true, ell);
 		//CODE
-			// don`t touch THIS!!!
 		this->DrawWindow(hdc);
 		EndPaint(hWnd, &ps);
 		break;

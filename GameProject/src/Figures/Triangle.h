@@ -11,7 +11,7 @@ private:
 	//(2)
 	// Equilateral
 	int iA;
-	float height;
+	int height;
 
 	int _x;
 	int _y;

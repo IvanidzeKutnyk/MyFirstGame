@@ -18,8 +18,10 @@ int Triang::Get_tC() { return this->tC; };
 
 int Triang::Get_iA() { return this->iA; };
 float Triang::Get_height() { return this->height; };
+
+
 void Triang::Set_height(int _a) {
-	this->height = ((_a * sqrt(3)) / 2);
+	this->height = (int)((_a * sqrt(3)) / 2);
 };
 
 float Triang::Get_R() { return this->R; };
@@ -41,7 +43,7 @@ Triang::Triang(int _ia, int x, int y, float r, float g, float b) {
 	this->R = r;
 	this->G = g;
 	this->B = b;
-	Set_height(this->Get_iA());
+	Set_height(iA);
 }
 Triang::Triang(int _tA, int _tB, int _tC, int _x, int _y, float _R, float _G, float _B) {
 	this->tA = _tA;
