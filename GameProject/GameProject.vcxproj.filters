@@ -20,6 +20,9 @@
     <ClCompile Include="src\Figures\Ellipse.cpp">
       <Filter>Figures</Filter>
     </ClCompile>
+    <ClCompile Include="src\Enemy\Enemy.cpp">
+      <Filter>My_Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\pch.h" />
@@ -38,6 +41,9 @@
     <ClInclude Include="src\Figures\Ellipse.h">
       <Filter>Figures</Filter>
     </ClInclude>
+    <ClInclude Include="src\Enemy\Enemy.h">
+      <Filter>My_Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">
@@ -51,6 +57,9 @@
     </Filter>
     <Filter Include="Figures">
       <UniqueIdentifier>{5cf3d47a-f192-49c4-b685-75591f694959}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My_Game">
+      <UniqueIdentifier>{232a928d-79eb-48fd-880a-1352e5ba5927}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
