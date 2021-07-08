@@ -15,4 +15,5 @@
 #include "GameMath/Color.h"
 #include <math.h>
 #include "Enemy/Enemy.h"
+#include "Player/Player.h"
 #include "Figures/Ellipse.h"

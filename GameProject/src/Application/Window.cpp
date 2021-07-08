@@ -2,9 +2,11 @@
 #include "Window.h"
 #include <chrono>
 
-Rectang rec;
-Triang tr(40, 0, 0, 0.2, 0.3, 0.9);
-ellipse ell;
+//Rectang rec;
+//Triang tr(40, 0, 0, 0.2, 0.3, 0.9);
+//ellipse ell;
+Enemy en;
+Player pl;
 char buff[100];
 
 Window::Windows_WindowClass Window::Windows_WindowClass::_windowClass;
@@ -226,9 +228,10 @@ void Window::GetLastT(Triang& _tr) {
 	}
 };
 
-void Window::All_F(bool _a, ellipse& el){
+void Window::All_F(bool _a, Enemy& en){
+#ifdef ellipse
 	if (_a == true) {
-		FillInColor(Color(1,1,1));
+		FillInColor(Color(1, 1, 1));
 		for (int i = 0; i < el.Get_R() * 2; i++)
 		{
 			for (int j = 0; j < el.Get_R() * 2; j++)
@@ -240,12 +243,20 @@ void Window::All_F(bool _a, ellipse& el){
 					this->_mColorBuffer[el._y + i][el._x + j].R = el.g;
 					this->_mColorBuffer[el._y + i][el._x + j].R = el.b;
 				}
-				//else {this->_mColorBuffer[el._y + i][el._x + j].R = 0.98f;}
 			}
 
 		}
-		//el._x++;
-		//el._y++;
+	}
+#endif // ellipse
+	for (int i = 0; i < en.Get_Size(); i++)
+	{
+		for (int j = 0; j < en.Get_Size(); j++)
+		{
+				this->_mColorBuffer[en.Get_Y() + i][en.Get_X() + j].R = en.Get_R();
+				this->_mColorBuffer[en.Get_Y() + i][en.Get_X() + j].R = en.Get_G();
+				this->_mColorBuffer[en.Get_Y() + i][en.Get_X() + j].R = en.Get_B();
+		}
+
 	}
 }
 //End My CoDE
@@ -289,12 +300,9 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	case WM_CREATE:
 		SetTimer(hWnd, 1, 20, NULL);
 		break;
-	case WM_KEYDOWN:
-		if (wParam == VK_TAB)
-		{
-			ell.Update(false, false, 1, false, 10);
-		}
-		
+	case WM_KEYDOWN:	
+		if(wParam == VK_RIGHT)
+			
 		break;
 	case WM_TIMER:
 		InvalidateRect(hWnd, NULL, FALSE);
@@ -307,7 +315,7 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		//CODE
 		//MoveRec(rec);
 		//MoveTr_e(tr);
-		All_F(true, ell);
+		All_F(true, en);
 		//CODE
 		this->DrawWindow(hdc);
 		EndPaint(hWnd, &ps);

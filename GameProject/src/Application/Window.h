@@ -45,7 +45,7 @@ public:
 	bool CheckSizeT(Triang& _tr, int _x, int _y, int _w, int _h);
 	void GetLastT(Triang& _tr);
 
-	void All_F(bool _a, ellipse& el);
+	void All_F(bool _a, Enemy& en);
 private:
 	int _mWidth;
 	int _mHeight;

@@ -30,11 +30,21 @@ float Enemy::Get_R() { return this->R; };
 float Enemy::Get_G() { return this->G; };
 float Enemy::Get_B() { return this->B; };
 
-Enemy::Enemy() {
-	this->Size = 10;
+Enemy::Enemy(){
+	this->Size = 40;
 	this->X = 0;
 	this->Y = 0;
+	this->death = false;
 	this->R =
 		this->G =
 		this->B = 0;
 };
+Enemy::Enemy(int _x, int _y) {
+	this->Size = 40;
+	this->X = _x;
+	this->Y = _y;
+	this->death = false;
+	this->R =
+		this->G =
+		this->B = 0;
+}

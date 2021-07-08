@@ -23,6 +23,9 @@
     <ClCompile Include="src\Enemy\Enemy.cpp">
       <Filter>My_Game</Filter>
     </ClCompile>
+    <ClCompile Include="src\Player\Player.cpp">
+      <Filter>My_Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\pch.h" />
@@ -42,6 +45,9 @@
       <Filter>Figures</Filter>
     </ClInclude>
     <ClInclude Include="src\Enemy\Enemy.h">
+      <Filter>My_Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Player\Player.h">
       <Filter>My_Game</Filter>
     </ClInclude>
   </ItemGroup>

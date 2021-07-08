@@ -16,7 +16,10 @@ public:
 	float Get_B();
 
 	int Get_Count();
+	void Update();
+	// Default Constructor
 	Enemy();
+	Enemy(int _x, int _y);
 	~Enemy() {};
 private:
 	// Enemy size
@@ -28,6 +31,9 @@ private:
 
 	// Color
 	float R, G, B;
+
+	// Game
+	bool death;
 
 	static int couter;
 };

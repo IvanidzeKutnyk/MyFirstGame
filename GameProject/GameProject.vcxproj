@@ -34,6 +34,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="src\Player\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application\Window.h" />
@@ -43,6 +44,7 @@
     <ClInclude Include="src\Figures\Triangle.h" />
     <ClInclude Include="src\GameMath\Color.h" />
     <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\Player\Player.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
