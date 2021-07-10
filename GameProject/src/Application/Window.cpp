@@ -6,7 +6,7 @@
 //Triang tr(40, 0, 0, 0.2, 0.3, 0.9);
 //ellipse ell;
 Enemy en;
-Player pl;
+Player pl(1024,500);
 char buff[100];
 
 Window::Windows_WindowClass Window::Windows_WindowClass::_windowClass;
@@ -84,7 +84,7 @@ Window::~Window()
 	if (this->_mColorBuffer)
 	{
 		for (int i = 0; i < this->_mHeight; i++)
-			delete[] this->_mColorBuffer[i];
+				delete[] this->_mColorBuffer[i];
 		delete[] this->_mColorBuffer;
 		this->_mColorBuffer = nullptr;
 	}
@@ -228,7 +228,7 @@ void Window::GetLastT(Triang& _tr) {
 	}
 };
 
-void Window::All_F(bool _a, Enemy& en){
+void Window::All_F(bool _a, Enemy& en, bool _b, Player& pl){
 #ifdef ellipse
 	if (_a == true) {
 		FillInColor(Color(1, 1, 1));
@@ -248,15 +248,36 @@ void Window::All_F(bool _a, Enemy& en){
 		}
 	}
 #endif // ellipse
-	for (int i = 0; i < en.Get_Size(); i++)
+	if (_a == true)
 	{
-		for (int j = 0; j < en.Get_Size(); j++)
+		for (int i = 0; i < en.Get_Size(); i++)
 		{
+			for (int j = 0; j < en.Get_Size(); j++)
+			{
 				this->_mColorBuffer[en.Get_Y() + i][en.Get_X() + j].R = en.Get_R();
 				this->_mColorBuffer[en.Get_Y() + i][en.Get_X() + j].R = en.Get_G();
 				this->_mColorBuffer[en.Get_Y() + i][en.Get_X() + j].R = en.Get_B();
-		}
+			}
 
+		}
+	}
+	/// <summary>
+	/// Доробити відображення гравця
+	/// </summary>
+	if (_b == true)
+	{
+		FillInColor(Color(1,1,1));
+		pl.Update();
+		for (int i = 0; i < pl.Get_Size(); i++)
+		{
+			for (int j = 0; j < pl.Get_Size(); j++)
+			{
+				this->_mColorBuffer[pl.Get_Y() + i][pl.Get_X() + j].R = pl.Get_R();
+				this->_mColorBuffer[pl.Get_Y() + i][pl.Get_X() + j].R = pl.Get_G();
+				this->_mColorBuffer[pl.Get_Y() + i][pl.Get_X() + j].R = pl.Get_B();
+			}
+
+		}
 	}
 }
 //End My CoDE
@@ -301,7 +322,8 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		SetTimer(hWnd, 1, 20, NULL);
 		break;
 	case WM_KEYDOWN:	
-		if(wParam == VK_RIGHT)
+		if (wParam == VK_TAB)
+			pl.Set_left(true);
 			
 		break;
 	case WM_TIMER:
@@ -315,7 +337,7 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		//CODE
 		//MoveRec(rec);
 		//MoveTr_e(tr);
-		All_F(true, en);
+		All_F(false, en,true,pl);
 		//CODE
 		this->DrawWindow(hdc);
 		EndPaint(hWnd, &ps);
