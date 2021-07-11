@@ -60,5 +60,4 @@ private:
 	Color** _mColorBuffer;
 	COLORREF* _mPixelMap;
 
-	std::vector<Rectang> _enemies;
 };

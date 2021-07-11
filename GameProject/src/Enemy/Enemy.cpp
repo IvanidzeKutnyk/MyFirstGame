@@ -21,43 +21,43 @@ void Enemy::AddOne(bool _a, bool _b) {
 	}
 };
 
-void Enemy::Set_R_G_B(float R, float G, float B){
-	this->R = R;
-	this->G = G;
-	this->B = B;
-}
-float Enemy::Get_R() { return this->R; };
-float Enemy::Get_G() { return this->G; };
-float Enemy::Get_B() { return this->B; };
+char buff[100];
 
-void Enemy::Update() {};
-void Enemy::Draw(Color _color, Color** _ColorBuffer) 
+void Enemy::Update() {
+	//if (this->X + this->Size == this->_mWidth - 1) { this->right = true; }
+
+
+};
+void Enemy::Draw(Color _color, Color** _CollorBuffer) 
 {
+	
 	for (int i = 0; i < Size; i++)
 	{
 		for (int j = 0; j < Size; j++)
 		{
-			_ColorBuffer[Y + i][X + j] = _color;
+			_CollorBuffer[this->Y + i][X + j] = _color;
 		}
-
 	}
+	
+	//snprintf(buff, sizeof(buff), "LOOL\n", 0);
+	//OutputDebugStringA(buff);
 };
 
-Enemy::Enemy(){
+Enemy::Enemy() {
 	this->Size = 40;
 	this->X = 0;
 	this->Y = 0;
 	this->death = false;
-	this->R =
-		this->G =
-		this->B = 0.7;
 };
-Enemy::Enemy(int _x, int _y) {
+
+Enemy::Enemy(int _x, int _y, int _w, int _h) {
 	this->Size = 40;
 	this->X = _x;
 	this->Y = _y;
 	this->death = false;
-	this->R =
-		this->G =
-		this->B = 0;
+	this->_mWidth = _w;
+	this->_mHeight = _h;
+	snprintf(buff, sizeof(buff), "ddddd\n", 0);
+	OutputDebugStringA(buff);
+	
 }

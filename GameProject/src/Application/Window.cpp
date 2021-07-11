@@ -2,12 +2,11 @@
 #include "Window.h"
 #include <chrono>
 
-//Rectang rec;
-//Triang tr(40, 0, 0, 0.2, 0.3, 0.9);
-ellipse ell;
-Enemy en;
-Player pl(1024,500);
-char buff[100];
+//char buff[100];
+
+Enemy en(5, 5, 1024, 500);
+Player pl(1024, 500);
+
 
 Window::Windows_WindowClass Window::Windows_WindowClass::_windowClass;
 
@@ -255,13 +254,13 @@ void Window::GetLastT(Triang& _tr) {
 void Window::Draw(Player _pl, Enemy _enemy)
 {
 	FillInColor(Color(1,1,1));
-	pl.Draw(Color(0,0,0), _mColorBuffer);
+	//pl.Draw(Color(0,0,0), _mColorBuffer);
 	_enemy.Draw(Color(0, 0, 0), _mColorBuffer);
 }
 
 void Window::Update(Player _pl, Enemy _enemy)
 {
-	pl.Update();
+	//pl.Update();
 	_enemy.Update();
 }
 
@@ -301,7 +300,6 @@ LRESULT CALLBACK Window::HandleMsgThunk(HWND hWnd, UINT msg, WPARAM wParam, LPAR
 LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	//snprintf(buff, sizeof(buff), "%s", msg);
-	pl.Set_Move(6);
 	switch (msg)
 	{
 	
@@ -342,9 +340,7 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
 		PAINTSTRUCT ps;
 		HDC hdc = BeginPaint(hWnd, &ps);
-		
 		//CODE
-		//MoveRec(rec);
 	
 		Update(pl,en);
 		Draw(pl,en);

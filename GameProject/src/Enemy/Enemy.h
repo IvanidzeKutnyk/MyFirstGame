@@ -9,18 +9,12 @@ public:
 	int Get_Y();
 	void AddOne(bool _a, bool _b);
 
-	void Set_R_G_B(float R, float G, float B);
 
-	float Get_R();
-	float Get_G();
-	float Get_B();
-
-	int Get_Count();
-	void Draw(Color color, Color** _ColorBuffer);
+	void Draw(Color _color, Color** _ColorBuffer);
 	void Update();
 	// Default Constructor
 	Enemy();
-	Enemy(int _x, int _y);
+	Enemy(int _x, int _y, int w, int h);
 	~Enemy() {};
 private:
 	// Enemy size
@@ -30,12 +24,16 @@ private:
 	int X;
 	int Y;
 
-
-	// Color
-	float R, G, B;
+	// Window Size
+	int _mWidth;
+	int _mHeight;
 
 	// Game
 	bool death;
-
-	static int couter;
+	
+	// Status border
+	bool up;
+	bool down;
+	bool left;
+	bool right;
 };

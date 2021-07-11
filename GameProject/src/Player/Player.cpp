@@ -45,7 +45,7 @@ void Player::Set_Move(int _a) { this->Move = _a; };
 
 void Player::Update() {
 	// Check End_Window
-	if (this->X + this->Size > 1024 - this->Move - 5)
+	if (this->X + this->Size > this->_mWidth - this->Move - 5)
 	{
 		this->right = false;
 	}
@@ -53,7 +53,7 @@ void Player::Update() {
 	{
 		this->left = false;
 	}
-	if (this->Y + this->Size > 500 - this->Move - 5) 
+	if (this->Y + this->Size > this->_mHeight - this->Move - 5) 
 	{
 		this->down = false;
 	}
