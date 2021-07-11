@@ -34,7 +34,8 @@ public:
 	void initGame();
 	int start();
 public:
-
+	//FIgures
+	/*
 	// Rectangle
 	void MoveRec(Rectang& _rec);
 	bool CheckSizeR(Rectang& _rec, int _x, int _y, int _w, int _h);
@@ -45,7 +46,12 @@ public:
 	bool CheckSizeT(Triang& _tr, int _x, int _y, int _w, int _h);
 	void GetLastT(Triang& _tr);
 
-	void All_F(bool _a, Enemy& en, bool _b, Player& pl);
+	*/
+
+	//Game
+	void Draw(Player _pl, Enemy _enemy);
+	void Update(Player _pl, Enemy _enemy);
+
 private:
 	int _mWidth;
 	int _mHeight;
@@ -53,4 +59,6 @@ private:
 	HWND _mHwnd;
 	Color** _mColorBuffer;
 	COLORREF* _mPixelMap;
+
+	std::vector<Rectang> _enemies;
 };

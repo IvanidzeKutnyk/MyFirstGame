@@ -9,8 +9,10 @@ class ellipse {
 		float r;
 		float g;
 		float b;
+
 		ellipse();
 		void Update(bool _u, bool _d, bool _r, bool l, int _b);
+		void Draw(int _x, int _y, Color _color, Color** _ColorBuffer);
 		int CheckIfDraw(int _R, int _x, int _y);
 private:
 		int R;

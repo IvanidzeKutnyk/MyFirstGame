@@ -16,6 +16,7 @@ public:
 	float Get_B();
 
 	int Get_Count();
+	void Draw(Color color, Color** _ColorBuffer);
 	void Update();
 	// Default Constructor
 	Enemy();
@@ -28,6 +29,7 @@ private:
 	// Coordinates
 	int X;
 	int Y;
+
 
 	// Color
 	float R, G, B;

@@ -30,6 +30,19 @@ float Enemy::Get_R() { return this->R; };
 float Enemy::Get_G() { return this->G; };
 float Enemy::Get_B() { return this->B; };
 
+void Enemy::Update() {};
+void Enemy::Draw(Color _color, Color** _ColorBuffer) 
+{
+	for (int i = 0; i < Size; i++)
+	{
+		for (int j = 0; j < Size; j++)
+		{
+			_ColorBuffer[Y + i][X + j] = _color;
+		}
+
+	}
+};
+
 Enemy::Enemy(){
 	this->Size = 40;
 	this->X = 0;
@@ -37,7 +50,7 @@ Enemy::Enemy(){
 	this->death = false;
 	this->R =
 		this->G =
-		this->B = 0;
+		this->B = 0.7;
 };
 Enemy::Enemy(int _x, int _y) {
 	this->Size = 40;

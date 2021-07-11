@@ -23,6 +23,26 @@ void ellipse::Update(bool _u, bool _d, bool _r, bool _l, int _b) {
 	if (_l == true) { this->left = false; _x -= _b; }
 }
 
+void ellipse::Draw(int _x, int _y, Color _color, Color** _ColorBuffer)
+{
+	for (int i = 0; i < R * 2; i++)
+	{
+		for (int j = 0; j < R * 2; j++)
+		{
+			if (sqrt(pow(R - i, 2) + pow(R - j, 2)) <= R
+				|| j == R || i == R)
+			{
+				_ColorBuffer[_y + i][_x + j] = _color;
+			}
+		}
+
+	}
+}
+
+
+
+
+
 ellipse::ellipse() {
 	this->R = 200;
 	this->_x = 10;

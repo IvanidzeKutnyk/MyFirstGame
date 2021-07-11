@@ -4,7 +4,7 @@
 
 //Rectang rec;
 //Triang tr(40, 0, 0, 0.2, 0.3, 0.9);
-//ellipse ell;
+ellipse ell;
 Enemy en;
 Player pl(1024,500);
 char buff[100];
@@ -95,6 +95,27 @@ Window::~Window()
 	}
 }
 
+// First Attempt
+#ifdef DEBUG
+/*
+if (_a == true) {
+		FillInColor(Color(1, 1, 1));
+		for (int i = 0; i < el.Get_R() * 2; i++)
+		{
+			for (int j = 0; j < el.Get_R() * 2; j++)
+			{
+				if (sqrt(pow(el.Get_R() - i, 2) + pow(el.Get_R() - j, 2)) <= el.Get_R()
+					|| j == el.Get_R() || i == el.Get_R())
+				{
+					this->_mColorBuffer[el._y + i][el._x + j].R = el.r;
+					this->_mColorBuffer[el._y + i][el._x + j].R = el.g;
+					this->_mColorBuffer[el._y + i][el._x + j].R = el.b;
+				}
+			}
+
+		}
+	}
+*/
 //My CoDE
 ///Rectangle
 void Window::MoveRec(Rectang& _rec) {
@@ -161,7 +182,7 @@ void Window::MoveTr_e(Triang& _tr) {
 				this->_mColorBuffer[_tr.Get_y() + i][_tr.Get_x() + j].B = _tr.Get_B();
 			}
 			_temp1--;
-		}
+}
 #	//Right_Side
 		float _temp = _tr.Get_iA() / 2;
 		for (int i = 0; i < _tr.Get_height(); i++)
@@ -180,7 +201,7 @@ void Window::MoveTr_e(Triang& _tr) {
 		}
 		_tr.Plus_X();
 		_tr.Plus_Y();
-	
+
 	}
 };
 bool Window::CheckSizeT(Triang& _tr, int _x, int _y, int _w, int _h) {
@@ -188,9 +209,10 @@ bool Window::CheckSizeT(Triang& _tr, int _x, int _y, int _w, int _h) {
 	{
 		return true;
 	}
-	else { 
-		return false; }
-	
+	else {
+		return false;
+	}
+
 
 }
 void Window::GetLastT(Triang& _tr) {
@@ -228,58 +250,21 @@ void Window::GetLastT(Triang& _tr) {
 	}
 };
 
-void Window::All_F(bool _a, Enemy& en, bool _b, Player& pl){
-#ifdef ellipse
-	if (_a == true) {
-		FillInColor(Color(1, 1, 1));
-		for (int i = 0; i < el.Get_R() * 2; i++)
-		{
-			for (int j = 0; j < el.Get_R() * 2; j++)
-			{
-				if (sqrt(pow(el.Get_R() - i, 2) + pow(el.Get_R() - j, 2)) <= el.Get_R()
-					|| j == el.Get_R() || i == el.Get_R())
-				{
-					this->_mColorBuffer[el._y + i][el._x + j].R = el.r;
-					this->_mColorBuffer[el._y + i][el._x + j].R = el.g;
-					this->_mColorBuffer[el._y + i][el._x + j].R = el.b;
-				}
-			}
+#endif // DEBUG
 
-		}
-	}
-#endif // ellipse
-	if (_a == true)
-	{
-		for (int i = 0; i < en.Get_Size(); i++)
-		{
-			for (int j = 0; j < en.Get_Size(); j++)
-			{
-				this->_mColorBuffer[en.Get_Y() + i][en.Get_X() + j].R = en.Get_R();
-				this->_mColorBuffer[en.Get_Y() + i][en.Get_X() + j].R = en.Get_G();
-				this->_mColorBuffer[en.Get_Y() + i][en.Get_X() + j].R = en.Get_B();
-			}
-
-		}
-	}
-	/// <summary>
-	/// Доробити відображення гравця
-	/// </summary>
-	if (_b == true)
-	{
-		FillInColor(Color(1,1,1));
-		pl.Update();
-		for (int i = 0; i < pl.Get_Size(); i++)
-		{
-			for (int j = 0; j < pl.Get_Size(); j++)
-			{
-				this->_mColorBuffer[pl.Get_Y() + i][pl.Get_X() + j].R = pl.Get_R();
-				this->_mColorBuffer[pl.Get_Y() + i][pl.Get_X() + j].R = pl.Get_G();
-				this->_mColorBuffer[pl.Get_Y() + i][pl.Get_X() + j].R = pl.Get_B();
-			}
-
-		}
-	}
+void Window::Draw(Player _pl, Enemy _enemy)
+{
+	FillInColor(Color(1,1,1));
+	pl.Draw(Color(0,0,0), _mColorBuffer);
+	_enemy.Draw(Color(0, 0, 0), _mColorBuffer);
 }
+
+void Window::Update(Player _pl, Enemy _enemy)
+{
+	pl.Update();
+	_enemy.Update();
+}
+
 //End My CoDE
 int Window::start()
 {
@@ -316,14 +301,38 @@ LRESULT CALLBACK Window::HandleMsgThunk(HWND hWnd, UINT msg, WPARAM wParam, LPAR
 LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	//snprintf(buff, sizeof(buff), "%s", msg);
+	pl.Set_Move(6);
 	switch (msg)
 	{
+	
 	case WM_CREATE:
 		SetTimer(hWnd, 1, 20, NULL);
 		break;
 	case WM_KEYDOWN:	
-		if (wParam == VK_TAB)
-			pl.Set_left(true);
+		switch (wParam)
+		{
+			case VK_LEFT:
+			{
+				pl.Set_left(true);
+				break;
+			}
+			case VK_RIGHT:
+			{
+				pl.Set_right(true);
+				break;
+			}
+			case VK_UP:
+			{
+				pl.Set_up(true);
+				break;
+			}
+			case VK_DOWN:
+			{
+				pl.Set_down(true);
+				break;
+			}
+
+		}
 			
 		break;
 	case WM_TIMER:
@@ -336,8 +345,9 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		
 		//CODE
 		//MoveRec(rec);
-		//MoveTr_e(tr);
-		All_F(false, en,true,pl);
+	
+		Update(pl,en);
+		Draw(pl,en);
 		//CODE
 		this->DrawWindow(hdc);
 		EndPaint(hWnd, &ps);

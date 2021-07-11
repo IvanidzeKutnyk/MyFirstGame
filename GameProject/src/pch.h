@@ -9,6 +9,7 @@
 #define _HAS_EXCEPTIONS 0
 #endif
 
+
 #include <Windows.h>
 #include "Figures/Rectangle.h"
 #include "Figures/Triangle.h"
@@ -17,3 +18,4 @@
 #include "Enemy/Enemy.h"
 #include "Player/Player.h"
 #include "Figures/Ellipse.h"
+#include <vector>
