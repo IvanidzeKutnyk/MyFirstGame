@@ -1,6 +1,6 @@
 #include "Enemy.h"
 #include "pch.h"
-
+int i = 0;
 void Enemy::SetSize(int _a) { this->Size = _a; };
 int Enemy::Get_Size() { return this->Size; };
 
@@ -21,13 +21,49 @@ void Enemy::AddOne(bool _a, bool _b) {
 	}
 };
 
-char buff[100];
 
 void Enemy::Update() {
-	//if (this->X + this->Size == this->_mWidth - 1) { this->right = true; }
-
-
-};
+	if (this->X < this->_mWidth / 2 && this->Y < this->_mHeight / 2 && i == 0) {
+		this->down = true;
+		this->right = true;
+		i++;
+	}
+	//Right
+	if (this->X + this->Size == this->_mWidth - 1) { this->right = false; this->left = true; }
+	//Left
+	if (this->X == 0) { this->left = false; this->right = true;}
+	//Down
+	if (this->Y + this->Size == this->_mHeight - 1) { this->down = false; this->up = true; }
+	//UP
+	if (this->Y == 0) { this->up = false; this->down = true;}
+}
+void Enemy::Get_Stat() {
+	//down ->
+	if (this->down == true && this->right == true)
+	{
+		X + 1;
+		this->Y + this->speed;
+	}
+	//Down <-
+	if (this->down == true && this->left == true)
+	{
+		this->X - this->speed;
+		this->Y + this->speed;
+	}
+	//up ->
+	if (this->up == true && this->right == true)
+	{
+		this->X + this->speed;
+		this->Y - this->speed;
+	}
+	//up <-
+	if (this->up == true && this->left == true)
+	{
+		this->X - this->speed;
+		this->Y - this->speed;
+	}
+	
+}
 void Enemy::Draw(Color _color, Color** _CollorBuffer) 
 {
 	
@@ -38,9 +74,7 @@ void Enemy::Draw(Color _color, Color** _CollorBuffer)
 			_CollorBuffer[this->Y + i][X + j] = _color;
 		}
 	}
-	
-	//snprintf(buff, sizeof(buff), "LOOL\n", 0);
-	//OutputDebugStringA(buff);
+	Get_Stat();
 };
 
 Enemy::Enemy() {
@@ -54,10 +88,15 @@ Enemy::Enemy(int _x, int _y, int _w, int _h) {
 	this->Size = 40;
 	this->X = _x;
 	this->Y = _y;
+	this->speed = 5;
 	this->death = false;
 	this->_mWidth = _w;
 	this->_mHeight = _h;
-	snprintf(buff, sizeof(buff), "ddddd\n", 0);
-	OutputDebugStringA(buff);
+	this->up =
+		this->down =
+		this->left =
+		this->right = false;
+	//snprintf(buff, sizeof(buff), "ddddd\n", 0);
+	//OutputDebugStringA(buff);
 	
 }

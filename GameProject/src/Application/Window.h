@@ -49,8 +49,8 @@ public:
 	*/
 
 	//Game
-	void Draw(Player _pl, Enemy _enemy);
-	void Update(Player _pl, Enemy _enemy);
+	void Draw();
+	void Update();
 
 private:
 	int _mWidth;
@@ -60,4 +60,6 @@ private:
 	Color** _mColorBuffer;
 	COLORREF* _mPixelMap;
 
+	std::vector<Enemy*> enemies;
+	Player* player;
 };

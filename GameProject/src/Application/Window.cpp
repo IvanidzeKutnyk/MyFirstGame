@@ -2,12 +2,6 @@
 #include "Window.h"
 #include <chrono>
 
-//char buff[100];
-
-Enemy en(5, 5, 1024, 500);
-Player pl(1024, 500);
-
-
 Window::Windows_WindowClass Window::Windows_WindowClass::_windowClass;
 
 Window::Windows_WindowClass::Windows_WindowClass()
@@ -83,7 +77,7 @@ Window::~Window()
 	if (this->_mColorBuffer)
 	{
 		for (int i = 0; i < this->_mHeight; i++)
-				delete[] this->_mColorBuffer[i];
+			delete[] this->_mColorBuffer[i];
 		delete[] this->_mColorBuffer;
 		this->_mColorBuffer = nullptr;
 	}
@@ -181,7 +175,7 @@ void Window::MoveTr_e(Triang& _tr) {
 				this->_mColorBuffer[_tr.Get_y() + i][_tr.Get_x() + j].B = _tr.Get_B();
 			}
 			_temp1--;
-}
+		}
 #	//Right_Side
 		float _temp = _tr.Get_iA() / 2;
 		for (int i = 0; i < _tr.Get_height(); i++)
@@ -251,17 +245,19 @@ void Window::GetLastT(Triang& _tr) {
 
 #endif // DEBUG
 
-void Window::Draw(Player _pl, Enemy _enemy)
+void Window::Draw()
 {
-	FillInColor(Color(1,1,1));
-	//pl.Draw(Color(0,0,0), _mColorBuffer);
-	_enemy.Draw(Color(0, 0, 0), _mColorBuffer);
+	FillInColor(Color(1, 1, 1));
+	this->player->Draw(Color(0, 0, 0), _mColorBuffer);
+	for (int i = 0; i < 1; i++)
+		this->enemies[i]->Draw(Color(0, 0, 0), _mColorBuffer);
 }
 
-void Window::Update(Player _pl, Enemy _enemy)
+void Window::Update()
 {
-	//pl.Update();
-	_enemy.Update();
+	this->player->Update();
+	for (int i = 0; i < 1; i++)
+		this->enemies[i]->Update();
 }
 
 //End My CoDE
@@ -299,39 +295,38 @@ LRESULT CALLBACK Window::HandleMsgThunk(HWND hWnd, UINT msg, WPARAM wParam, LPAR
 
 LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-	//snprintf(buff, sizeof(buff), "%s", msg);
 	switch (msg)
 	{
-	
+
 	case WM_CREATE:
 		SetTimer(hWnd, 1, 20, NULL);
 		break;
-	case WM_KEYDOWN:	
+	case WM_KEYDOWN:
 		switch (wParam)
 		{
-			case VK_LEFT:
-			{
-				pl.Set_left(true);
-				break;
-			}
-			case VK_RIGHT:
-			{
-				pl.Set_right(true);
-				break;
-			}
-			case VK_UP:
-			{
-				pl.Set_up(true);
-				break;
-			}
-			case VK_DOWN:
-			{
-				pl.Set_down(true);
-				break;
-			}
+		case VK_LEFT:
+		{
+			this->player->Set_left(true);
+			break;
+		}
+		case VK_RIGHT:
+		{
+			this->player->Set_right(true);
+			break;
+		}
+		case VK_UP:
+		{
+			this->player->Set_up(true);
+			break;
+		}
+		case VK_DOWN:
+		{
+			this->player->Set_down(true);
+			break;
+		}
 
 		}
-			
+
 		break;
 	case WM_TIMER:
 		InvalidateRect(hWnd, NULL, FALSE);
@@ -341,9 +336,10 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		PAINTSTRUCT ps;
 		HDC hdc = BeginPaint(hWnd, &ps);
 		//CODE
-	
-		Update(pl,en);
-		Draw(pl,en);
+
+		Update();
+		Draw();
+
 		//CODE
 		this->DrawWindow(hdc);
 		EndPaint(hWnd, &ps);
@@ -372,6 +368,11 @@ void Window::initGame()
 
 	this->_mPixelMap = new COLORREF[this->_mWidth * this->_mHeight];
 
+	for (int i = 0; i < 1; i++)
+		this->enemies.push_back(new Enemy(1,1, 1024, 500));
+
+	this->player = new Player(1024, 500);
+
 	this->FillInColor(Color(0.8, 0.4, 0.2));
 }
 
@@ -389,26 +390,13 @@ void Window::DrawWindow(HDC hdc)
 			);
 		}
 	}
-	// creatign new bitmap with size of screen
+
 	HBITMAP hBitmap = CreateBitmap(this->_mWidth, this->_mHeight, 1, 32, this->_mPixelMap);
-
-	// creating local DC( in GDI+ it's called 'Graphics' )
 	HDC hLocalDC = CreateCompatibleDC(hdc);
-
-	// selecting our bitmap in GDI+'s Graphics
 	HBITMAP hOldBmp = (HBITMAP)SelectObject(hLocalDC, hBitmap);
-
-	// copy from localDC( Graphics ) to our window one
 	BitBlt(hdc, 0, 0, this->_mWidth, this->_mHeight, hLocalDC, 0, 0, SRCCOPY);
-
-	// selecting literaly nothing( or system's value )
-	// to aviod memory linked resources( can be kind of leak )
 	SelectObject(hLocalDC, hOldBmp);
-
-	// dropping localDC(Grapchics )
 	DeleteDC(hLocalDC);
-
-	// dropping bitmap
 	DeleteObject(hBitmap);
 }
 
