@@ -369,7 +369,7 @@ void Window::initGame()
 	this->_mPixelMap = new COLORREF[this->_mWidth * this->_mHeight];
 
 	for (int i = 0; i < 1; i++)
-		this->enemies.push_back(new Enemy(1,1, 1024, 500));
+		this->enemies.push_back(new Enemy(2,2, 1024, 500));
 
 	this->player = new Player(1024, 500);
 

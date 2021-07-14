@@ -29,38 +29,38 @@ void Enemy::Update() {
 		i++;
 	}
 	//Right
-	if (this->X + this->Size == this->_mWidth - 1) { this->right = false; this->left = true; }
+	if (this->X + this->Size >= this->_mWidth - 1) { this->right = false; this->left = true; }
 	//Left
-	if (this->X == 0) { this->left = false; this->right = true;}
+	if (this->X <= 0) { this->left = false; this->right = true;}
 	//Down
-	if (this->Y + this->Size == this->_mHeight - 1) { this->down = false; this->up = true; }
+	if (this->Y + this->Size >= this->_mHeight - 1) { this->down = false; this->up = true; }
 	//UP
-	if (this->Y == 0) { this->up = false; this->down = true;}
+	if (this->Y <= 0) { this->up = false; this->down = true;}
 }
 void Enemy::Get_Stat() {
 	//down ->
 	if (this->down == true && this->right == true)
 	{
-		X + 1;
-		this->Y + this->speed;
+		this->X += this->speed;
+		this->Y += this->speed;
 	}
 	//Down <-
 	if (this->down == true && this->left == true)
 	{
-		this->X - this->speed;
-		this->Y + this->speed;
+		this->X -= this->speed;
+		this->Y += this->speed;
 	}
 	//up ->
 	if (this->up == true && this->right == true)
 	{
-		this->X + this->speed;
-		this->Y - this->speed;
+		this->X += this->speed;
+		this->Y -= this->speed;
 	}
 	//up <-
 	if (this->up == true && this->left == true)
 	{
-		this->X - this->speed;
-		this->Y - this->speed;
+		this->X -= this->speed;
+		this->Y -= this->speed;
 	}
 	
 }
@@ -88,7 +88,7 @@ Enemy::Enemy(int _x, int _y, int _w, int _h) {
 	this->Size = 40;
 	this->X = _x;
 	this->Y = _y;
-	this->speed = 5;
+	this->speed = 2;
 	this->death = false;
 	this->_mWidth = _w;
 	this->_mHeight = _h;
