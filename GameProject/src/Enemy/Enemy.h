@@ -12,7 +12,7 @@ public:
 
 	void Draw(Color _color, Color** _ColorBuffer);
 	void Update();
-
+	int Get_Amount();
 	void Get_Stat();
 	// Default Constructor
 	Enemy();
@@ -33,6 +33,8 @@ private:
 	// Game
 	bool death;
 	int speed;
+	bool start_point;
+	int amount;
 	
 	// Status border
 	bool up;

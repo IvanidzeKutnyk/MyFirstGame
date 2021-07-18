@@ -1,9 +1,8 @@
 #include "Enemy.h"
 #include "pch.h"
-int i = 0;
 void Enemy::SetSize(int _a) { this->Size = _a; };
 int Enemy::Get_Size() { return this->Size; };
-
+int Enemy::Get_Amount() { return this->amount; }
 void Enemy::Set_X_Y(int _x, int _y) {
 	this->X = _x;
 	this->Y = _y;
@@ -23,11 +22,33 @@ void Enemy::AddOne(bool _a, bool _b) {
 
 
 void Enemy::Update() {
-	if (this->X < this->_mWidth / 2 && this->Y < this->_mHeight / 2 && i == 0) {
+	/// Start area
+	//Down ->
+	if (this->X < this->_mWidth / 2 && this->Y < this->_mHeight / 2 && this->start_point == false) {
 		this->down = true;
 		this->right = true;
-		i++;
+		this->start_point = true;
 	}
+	//Down <-
+	if (this->X > this->_mWidth / 2 && this->Y < this->_mHeight / 2 && this->start_point == false) {
+		this->down = true;
+		this->left = true;
+		this->start_point = true;
+	}
+	//Up ->
+	if (this->X < this->_mWidth / 2 && this->Y > this->_mHeight / 2 && this->start_point == false) {
+		this->up = true;
+		this->right = true;
+		this->start_point = true;
+	}
+	//Up <-
+	if (this->X > this->_mWidth / 2 && this->Y > this->_mHeight / 2 && this->start_point == false) {
+		this->up = true;
+		this->left = true;
+		this->start_point = true;
+	}
+	
+	///border_kick
 	//Right
 	if (this->X + this->Size >= this->_mWidth - 1) { this->right = false; this->left = true; }
 	//Left
@@ -90,6 +111,8 @@ Enemy::Enemy(int _x, int _y, int _w, int _h) {
 	this->Y = _y;
 	this->speed = 2;
 	this->death = false;
+	this->start_point = false;
+	this->amount = 3;
 	this->_mWidth = _w;
 	this->_mHeight = _h;
 	this->up =

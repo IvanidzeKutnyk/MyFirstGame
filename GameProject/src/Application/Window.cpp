@@ -249,14 +249,14 @@ void Window::Draw()
 {
 	FillInColor(Color(1, 1, 1));
 	this->player->Draw(Color(0, 0, 0), _mColorBuffer);
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < 3; i++)
 		this->enemies[i]->Draw(Color(0, 0, 0), _mColorBuffer);
 }
 
 void Window::Update()
 {
 	this->player->Update();
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < 3; i++)
 		this->enemies[i]->Update();
 }
 
@@ -368,8 +368,8 @@ void Window::initGame()
 
 	this->_mPixelMap = new COLORREF[this->_mWidth * this->_mHeight];
 
-	for (int i = 0; i < 1; i++)
-		this->enemies.push_back(new Enemy(2,2, 1024, 500));
+	for (int i = 0; i < 3; i++)
+		this->enemies.push_back(new Enemy(i * 300,i * 100, 1024, 500));
 
 	this->player = new Player(1024, 500);
 

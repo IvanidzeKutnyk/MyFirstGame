@@ -18,4 +18,5 @@
 #include "Enemy/Enemy.h"
 #include "Player/Player.h"
 #include "Figures/Ellipse.h"
+#include "Shot/Shot.h"
 #include <vector>
