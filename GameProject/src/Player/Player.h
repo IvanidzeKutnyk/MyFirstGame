@@ -19,6 +19,9 @@ public:
 
 	void Set_Movement_False();
 
+	int Get_W_H();
+	int Get_W_W();
+
 	void Set_up(bool _a);
 	void Set_down(bool _a);
 	void Set_left(bool _a);

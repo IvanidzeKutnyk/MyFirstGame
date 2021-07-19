@@ -22,6 +22,9 @@ void Player::Set_X_Y(int _X, int _Y) {
 int Player::Get_X() { return this->X; };
 int Player::Get_Y() { return this->Y; };
 
+int Player::Get_W_H() { return this->_mHeight; };
+int Player::Get_W_W() { return this->_mWidth; };
+
 // Object Size
 int Player::Get_Size() { return this->Size; };
 

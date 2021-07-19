@@ -62,4 +62,5 @@ private:
 
 	std::vector<Enemy*> enemies;
 	Player* player;
+	std::vector<Shooting*> shoots;
 };

@@ -251,6 +251,11 @@ void Window::Draw()
 	this->player->Draw(Color(0, 0, 0), _mColorBuffer);
 	for (int i = 0; i < 3; i++)
 		this->enemies[i]->Draw(Color(0, 0, 0), _mColorBuffer);
+
+	for (int i = 0; i < this->shoots.size(); i++)
+	{
+		this->shoots[i]->Draw(Color(0.5,0.7,0.2), _mColorBuffer);
+	}
 }
 
 void Window::Update()
@@ -258,6 +263,10 @@ void Window::Update()
 	this->player->Update();
 	for (int i = 0; i < 3; i++)
 		this->enemies[i]->Update();
+	for (int i = 0; i < this->shoots.size(); i++)
+	{
+		this->shoots[i]->Update();
+	}
 }
 
 //End My CoDE
@@ -304,26 +313,31 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	case WM_KEYDOWN:
 		switch (wParam)
 		{
-		case VK_LEFT:
-		{
-			this->player->Set_left(true);
-			break;
-		}
-		case VK_RIGHT:
-		{
-			this->player->Set_right(true);
-			break;
-		}
-		case VK_UP:
-		{
-			this->player->Set_up(true);
-			break;
-		}
-		case VK_DOWN:
-		{
-			this->player->Set_down(true);
-			break;
-		}
+				case VK_LEFT:
+				{
+					this->player->Set_left(true);
+					break;
+				}
+				case VK_RIGHT:
+				{
+					this->player->Set_right(true);
+					break;
+				}
+				case VK_UP:
+				{
+					this->player->Set_up(true);
+					break;
+				}
+				case VK_DOWN:
+				{
+					this->player->Set_down(true);
+					break;
+				}
+				case VK_TAB:
+				{
+					this->shoots.push_back(new Shooting(10,5,5, player));
+					break;
+				}
 
 		}
 
@@ -367,10 +381,11 @@ void Window::initGame()
 		this->_mColorBuffer[i] = new Color[this->_mWidth];
 
 	this->_mPixelMap = new COLORREF[this->_mWidth * this->_mHeight];
-
+	
+	//Create Enemy
 	for (int i = 0; i < 3; i++)
 		this->enemies.push_back(new Enemy(i * 300,i * 100, 1024, 500));
-
+	//Create Player
 	this->player = new Player(1024, 500);
 
 	this->FillInColor(Color(0.8, 0.4, 0.2));
