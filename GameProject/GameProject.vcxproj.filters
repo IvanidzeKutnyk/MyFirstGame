@@ -29,6 +29,9 @@
     <ClCompile Include="src\Shot\Shot.cpp">
       <Filter>My_Game</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameWorld\GameWorld.cpp">
+      <Filter>My_Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\pch.h" />
@@ -56,6 +59,9 @@
     <ClInclude Include="src\Shot\Shot.h">
       <Filter>My_Game</Filter>
     </ClInclude>
+    <ClInclude Include="src\GameWorld\GameWorld.h">
+      <Filter>My_Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">
@@ -73,5 +79,13 @@
     <Filter Include="My_Game">
       <UniqueIdentifier>{232a928d-79eb-48fd-880a-1352e5ba5927}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Example">
+      <UniqueIdentifier>{b7333a2c-b853-4761-8977-5bd9c17099e0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\Example\EX_1.txt">
+      <Filter>Example</Filter>
+    </Text>
   </ItemGroup>
 </Project>

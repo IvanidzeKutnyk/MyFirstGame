@@ -25,6 +25,7 @@
     <ClCompile Include="src\Figures\Rectangle.cpp" />
     <ClCompile Include="src\Figures\Triangle.cpp" />
     <ClCompile Include="src\GameMath\Color.cpp" />
+    <ClCompile Include="src\GameWorld\GameWorld.cpp" />
     <ClCompile Include="src\Main\main.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -44,9 +45,13 @@
     <ClInclude Include="src\Figures\Rectangle.h" />
     <ClInclude Include="src\Figures\Triangle.h" />
     <ClInclude Include="src\GameMath\Color.h" />
+    <ClInclude Include="src\GameWorld\GameWorld.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\Player\Player.h" />
     <ClInclude Include="src\Shot\Shot.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\Example\EX_1.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

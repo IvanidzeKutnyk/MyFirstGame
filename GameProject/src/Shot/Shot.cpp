@@ -22,12 +22,9 @@ void Shooting::Draw(Color _color, Color** _CollorBuffer) {
 	}
 }
 void Shooting::Update() {
-	if (this->X <= 5 || this->X >= this->w_we - 5) {}
-	if (this->Y <= 5 || this->Y >= this->w_hi - 5) {}
-	else
-	{
+	
 		this->Y -= this->speed;
-	}
+	
 }
 int Shooting::X_param(int _x, int _y){
 	return this->X  = _x+ ((_y / 2) - (this->weight / 2));

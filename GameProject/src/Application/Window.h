@@ -34,23 +34,7 @@ public:
 	void initGame();
 	int start();
 public:
-	//FIgures
-	/*
-	// Rectangle
-	void MoveRec(Rectang& _rec);
-	bool CheckSizeR(Rectang& _rec, int _x, int _y, int _w, int _h);
-	void GetLastR(Rectang& _rec);
 
-	// Triangle_Equilateral
-	void MoveTr_e(Triang& _tr);
-	bool CheckSizeT(Triang& _tr, int _x, int _y, int _w, int _h);
-	void GetLastT(Triang& _tr);
-
-	*/
-
-	//Game
-	void Draw();
-	void Update();
 
 private:
 	int _mWidth;
@@ -60,7 +44,5 @@ private:
 	Color** _mColorBuffer;
 	COLORREF* _mPixelMap;
 
-	std::vector<Enemy*> enemies;
-	Player* player;
-	std::vector<Shooting*> shoots;
+	GameWorld gameworld;
 };
