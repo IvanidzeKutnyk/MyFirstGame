@@ -48,12 +48,7 @@ Window::Window(int width, int height, const wchar_t* title)
 	, _mHeight(height)
 	, _mIsAlive(true)
 {
-	RECT wr;
-	wr.left = 100;
-	wr.right = width + wr.left;
-	wr.top = 100;
-	wr.bottom = height + wr.top;
-	AdjustWindowRect(&wr, WS_OVERLAPPEDWINDOW, FALSE);
+	
 
 	this->_mHwnd = CreateWindowExW(
 		0,
@@ -62,8 +57,8 @@ Window::Window(int width, int height, const wchar_t* title)
 		WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,
-		wr.right - wr.left,
-		wr.bottom - wr.top,
+		this->_mWidth,
+		this->_mHeight,
 		nullptr, nullptr,
 		Windows_WindowClass::getHinstanse(),
 		this);
@@ -134,30 +129,37 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		switch (wParam)
 		{
 		case VK_LEFT:
-		{	
 			gameworld.Set_Key(4);
 			break;
-		}
 		case VK_RIGHT:
-		{
 			gameworld.Set_Key(3);
 			break;
-		}
 		case VK_UP:
-		{
 			gameworld.Set_Key(1);
 			break;
-		}
 		case VK_DOWN:
-		{
 			gameworld.Set_Key(2);
-
+			break;
+		case VK_SPACE:
+			gameworld.Shot();
 			break;
 		}
-		case VK_SPACE:
+		break;
+	case WM_KEYUP:
+		switch (wParam)
 		{
-			gameworld.Shot();
-		}
+		case VK_LEFT:
+			gameworld.UnSet_Key(4);
+			break;
+		case VK_RIGHT:
+			gameworld.UnSet_Key(3);
+			break;
+		case VK_UP:
+			gameworld.UnSet_Key(1);
+			break;
+		case VK_DOWN:
+			gameworld.UnSet_Key(2);
+			break;
 		}
 		break;
 	case WM_TIMER:
@@ -185,6 +187,10 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		((MINMAXINFO*)lParam)->ptMaxSize.y = this->_mHeight;
 		break;
 	case WM_CLOSE:
+		RECT rect;
+		GetWindowRect(this->_mHwnd,&rect);
+		int width = rect.right - rect.left;
+		int hight = rect.bottom - rect.top;
 		PostQuitMessage(0);
 		break;
 	}

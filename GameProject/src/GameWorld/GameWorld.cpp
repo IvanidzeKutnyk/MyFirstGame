@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "GameWorld.h"
-
+char buff[100];
 void GameWorld::FillColor(Color _color, Color** _colorBuffer) 
 {
 	for (int i = 0; i < this->_mHeight; i++)
@@ -40,6 +40,28 @@ void GameWorld::Set_Key(int _a) {
 	}
 	}
 }
+void GameWorld::UnSet_Key(int _a) {
+
+	switch (_a)
+	{
+	case 1: {
+		player->Set_up(false);
+		break;
+	}
+	case 2: {
+		player->Set_down(false);
+		break;
+	}
+	case 3: {
+		player->Set_right(false);
+		break;
+	}
+	case 4: {
+		player->Set_left(false);
+		break;
+	}
+	}
+}
 void GameWorld::Draw(Color** _colorBuffer)
 {
 	//Fill Color
@@ -56,13 +78,13 @@ void GameWorld::Draw(Color** _colorBuffer)
 	//Draw shoots
 	for (int i = 0; i < this->shoots.size(); i++)
 	{
-		this->shoots[i]->Draw(Color(0.5, 0.7, 0.2), _colorBuffer);
+		this->shoots[i].Draw(Color(1, 1, 1), _colorBuffer);
 	}
 
 }
 void GameWorld::Shot() 
 {
-	this->shoots.push_back(new Shooting(10, 5, 5, player));
+	this->shoots.push_back(Shooting(10, 5, 5, player));
 }
 void GameWorld::Update()
 {
@@ -77,16 +99,21 @@ void GameWorld::Update()
 	//Update Shoots
 	for (int i = 0; i < this->shoots.size(); i++)
 	{
-		this->shoots[i]->Update();
+		this->shoots[i].Update();
 	}
 	//Delete shoot objects
-	for (auto itr = shoots.begin(); itr != shoots.end(); ++itr)
+	for(int i = 0; i < shoots.size(); i++)
 	{
-			shoots.erase(itr);
-	}
+		if (this->shoots[i].Get_Y() < 10)
+		{
+			//snprintf(buff, sizeof(buff), " Vector: %d", shoots.size());
+			//OutputDebugStringA(buff);
+
+			shoots.erase(shoots.begin() + i);
+			i--;
+		}
+	}	
 }
-
-
 GameWorld::GameWorld()
 {
 	//Size

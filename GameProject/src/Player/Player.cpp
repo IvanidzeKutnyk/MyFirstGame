@@ -12,7 +12,8 @@ void Player::Set_left(bool _a) { this->left = _a; };
 void Player::Set_right(bool _a) { this->right = _a; };
 
 // coordinates
-void Player::Set_X_Y(int _X, int _Y) {
+void Player::Set_X_Y(int _X, int _Y) 
+{
 	this->_mWidth = _X;
 	this->_mHeight = _Y;
 	this->Y = (_Y - this->Size) - 10;
@@ -66,10 +67,11 @@ void Player::Update() {
 	}
 
 	//Move
-	if (this->up == true) { this->up = false; this->Y -= this->Move; }
-	if (this->down == true) { this->down = false; this->Y += this->Move; }
-	if (this->left == true) { this->left = false; this->X -= this->Move; }
-	if (this->right == true) { this->right = false; this->X += this->Move; }
+	if (this->up == true) {this->Y -= this->Move; }
+	if (this->down == true) {this->Y += this->Move; }
+	if (this->left == true) {this->X -= this->Move; }
+	if (this->right == true) {this->X += this->Move; }
+
 
 }
 void Player::Draw(Color _color, Color** _ColorBuffer) {
@@ -83,10 +85,11 @@ void Player::Draw(Color _color, Color** _ColorBuffer) {
 	}
 }
 
-Player::Player(int _X, int _Y) {
+Player::Player(int _X, int _Y)//1024 500 
+{
 	Set_Movement_False();
 
-	this->Move = 10;
+	this->Move = 5;
 	this->Size = 30;
 	this->X = this->Y = 50;
 	Set_X_Y(_X, _Y);

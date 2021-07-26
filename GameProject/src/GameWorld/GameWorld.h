@@ -10,9 +10,12 @@ public:
 	
 	//Shoots_key_logic
 	void Set_Key(int _a);
+	void UnSet_Key(int _b);
 
 	//Shoot
 	void Shot();
+
+
 	GameWorld();
 
 private:
@@ -26,11 +29,14 @@ private:
 	// Enemy
 	int num;
 
+	// Player
+	int speed_p;
+
 	//Color Window
 	Color _color;
 
 	//Game objects
 	std::vector<Enemy*> enemies;
 	Player* player;
-	std::vector <Shooting*> shoots;
+	std::vector <Shooting> shoots;
 };

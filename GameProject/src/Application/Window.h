@@ -39,6 +39,8 @@ public:
 private:
 	int _mWidth;
 	int _mHeight;
+	int _MW_P;
+	int _MH_P;
 	bool _mIsAlive;
 	HWND _mHwnd;
 	Color** _mColorBuffer;

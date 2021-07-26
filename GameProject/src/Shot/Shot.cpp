@@ -24,8 +24,8 @@ void Shooting::Draw(Color _color, Color** _CollorBuffer) {
 void Shooting::Update() {
 	
 		this->Y -= this->speed;
-	
 }
+int Shooting::Get_Y() { return this->Y; }
 int Shooting::X_param(int _x, int _y){
 	return this->X  = _x+ ((_y / 2) - (this->weight / 2));
 }
