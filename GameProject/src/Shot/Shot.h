@@ -13,7 +13,9 @@ public:
 	void Draw(Color _color, Color** _CollorBuffer);
 	int X_param(int _x, int _y);
 
+	int Get_X();
 	int Get_Y();
+
 	void Update();
 private:
 	//Size

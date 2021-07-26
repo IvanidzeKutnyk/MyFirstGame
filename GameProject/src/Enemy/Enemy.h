@@ -14,6 +14,9 @@ public:
 	void Update();
 	int Get_Amount();
 	void Get_Stat();
+
+	void Set_Stat_D();
+	bool Get_Stat_D();
 	// Default Constructor
 	Enemy();
 	Enemy(int _x, int _y, int w, int h);
@@ -32,6 +35,7 @@ private:
 
 	// Game
 	bool death;
+
 	int speed;
 	bool start_point;
 	int amount;

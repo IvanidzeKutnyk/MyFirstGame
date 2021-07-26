@@ -20,6 +20,8 @@ void Enemy::AddOne(bool _a, bool _b) {
 	}
 };
 
+bool Enemy::Get_Stat_D() { return this->death; };
+void Enemy::Set_Stat_D() { this->death = true; };
 
 void Enemy::Update() {
 	/// Start area
@@ -50,13 +52,13 @@ void Enemy::Update() {
 	
 	///border_kick
 	//Right
-	if (this->X + this->Size >= this->_mWidth - 1) { this->right = false; this->left = true; }
+	if (this->X + this->Size >= this->_mWidth - 5) { this->right = false; this->left = true; }
 	//Left
-	if (this->X <= 0) { this->left = false; this->right = true;}
+	if (this->X <= 5) { this->left = false; this->right = true;}
 	//Down
-	if (this->Y + this->Size >= this->_mHeight - 1) { this->down = false; this->up = true; }
+	if (this->Y + this->Size >= this->_mHeight - 5) { this->down = false; this->up = true; }
 	//UP
-	if (this->Y <= 0) { this->up = false; this->down = true;}
+	if (this->Y <= 5) { this->up = false; this->down = true;}
 }
 void Enemy::Get_Stat() {
 	//down ->

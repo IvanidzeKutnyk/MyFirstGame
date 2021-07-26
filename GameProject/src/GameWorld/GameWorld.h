@@ -15,6 +15,10 @@ public:
 	//Shoot
 	void Shot();
 
+	//Rand COo
+
+	int Rand_X();
+	int Rand_Y();
 
 	GameWorld();
 
@@ -28,6 +32,7 @@ private:
 
 	// Enemy
 	int num;
+	int max;
 
 	// Player
 	int speed_p;

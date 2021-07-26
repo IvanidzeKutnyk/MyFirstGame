@@ -62,6 +62,7 @@ void GameWorld::UnSet_Key(int _a) {
 	}
 	}
 }
+
 void GameWorld::Draw(Color** _colorBuffer)
 {
 	//Fill Color
@@ -86,11 +87,37 @@ void GameWorld::Shot()
 {
 	this->shoots.push_back(Shooting(10, 5, 5, player));
 }
+int GameWorld::Rand_X() 
+{
+	int X = 1 + rand() % this->_mWidth;
+	if (X < enemies[1]->Get_Size())
+		X += enemies[1]->Get_Size();
+	if (X > this->_mWidth - enemies[1]->Get_Size())
+		X -= enemies[1]->Get_Size();
+
+	return X;
+}
+int GameWorld::Rand_Y()
+{
+	int Y = 1 + rand() % this->_mHeight;
+	if (Y < enemies[1]->Get_Size())
+		Y += enemies[1]->Get_Size();
+	if (Y > this->_mHeight - enemies[1]->Get_Size())
+		Y -= enemies[1]->Get_Size();
+
+	return Y;
+}
 void GameWorld::Update()
 {
+	//Check amount of enemies
+	if (this->num <= 3)
+	{
+		this->enemies.push_back(new Enemy(Rand_X(), Rand_Y(), _mWidth, _mHeight));//1024;500
+
+		this->num += 1;
+	}
 	//Update Player
 	this->player->Update();
-
 	//Update Enemies
 	for (int i = 0; i < this->num; i++)
 	{
@@ -112,7 +139,30 @@ void GameWorld::Update()
 			shoots.erase(shoots.begin() + i);
 			i--;
 		}
-	}	
+	}
+	//Delete shoot with enemy objects
+	for (int i = 0; i < enemies.size(); i++)
+	{
+		
+		for (int j = 0; j < shoots.size(); j++)
+		{
+			if (shoots[j].Get_X() > enemies[i]->Get_X() 
+				&& shoots[j].Get_X() < enemies[i]->Get_X() + enemies[i]->Get_Size()
+				&& shoots[j].Get_Y() < enemies[i]->Get_Y() + enemies[i]->Get_Size())
+			{
+				//snprintf(buff, sizeof(buff), "Enemy %d \n",a);
+				//OutputDebugStringA(buff);
+
+				shoots.erase(shoots.begin() + j);
+				enemies.erase(enemies.begin() + i);
+				this->num -= 1;
+				i = 0;
+				j = 0;
+			}
+		}
+	}
+
+
 }
 GameWorld::GameWorld()
 {
@@ -122,6 +172,7 @@ GameWorld::GameWorld()
 
 	//Number of enemies
 	this->num = 5;
+	this->max = 5;
 	//Speed
 	this->speed = 5;
 

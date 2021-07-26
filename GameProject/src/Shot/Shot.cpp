@@ -25,7 +25,8 @@ void Shooting::Update() {
 	
 		this->Y -= this->speed;
 }
-int Shooting::Get_Y() { return this->Y; }
+int Shooting::Get_Y() { return this->Y; };
+int Shooting::Get_X() { return this->X; };
 int Shooting::X_param(int _x, int _y){
 	return this->X  = _x+ ((_y / 2) - (this->weight / 2));
 }
