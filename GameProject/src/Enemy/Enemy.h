@@ -45,9 +45,9 @@ private:
 
 	// Game
 	bool death;
+	bool start_point;
 
 	int speed;
-	bool start_point;
 	int amount;
 	
 	// Status border

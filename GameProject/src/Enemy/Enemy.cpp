@@ -112,6 +112,7 @@ Enemy::Enemy(int _x, int _y, int _w, int _h) {
 	this->Y = _y;
 	this->speed = 2;
 	this->death = false;
+	this->start_point = false;
 	this->amount = 3;
 	this->_mWidth = _w;
 	this->_mHeight = _h;
