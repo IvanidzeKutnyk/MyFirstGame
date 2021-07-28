@@ -20,8 +20,7 @@ void Enemy::AddOne(bool _a, bool _b) {
 	}
 };
 
-bool Enemy::Get_Stat_D() { return this->death; };
-void Enemy::Set_Stat_D() { this->death = true; };
+
 
 void Enemy::Update() {
 	/// Start area
@@ -113,7 +112,6 @@ Enemy::Enemy(int _x, int _y, int _w, int _h) {
 	this->Y = _y;
 	this->speed = 2;
 	this->death = false;
-	this->start_point = false;
 	this->amount = 3;
 	this->_mWidth = _w;
 	this->_mHeight = _h;

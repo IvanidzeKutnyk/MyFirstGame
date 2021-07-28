@@ -9,8 +9,7 @@ Shooting::Shooting(int _a, int _b, int _c, Player* _player) {
 	this->X = X_param(_player->Get_X(), _player->Get_Size());
 	this->w_hi = _player->Get_W_H();
 	this->w_we = _player->Get_W_W();
-	this->Stat_Shot = false;
-};
+	};
 void Shooting::Draw(Color _color, Color** _CollorBuffer) {
 
 	for (int i = 0; i < this->hight; i++)

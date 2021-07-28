@@ -1,11 +1,6 @@
 #include "Player.h"
 #include "pch.h"
-// object movement
-bool Player::Get_up() { return this->up; };
-bool Player::Get_down() { return this->down; };
-bool Player::Get_left() { return this->left; };
-bool Player::Get_right() { return this->right; };
-
+//Set Status Move
 void Player::Set_up(bool _a) { this->up = _a; };
 void Player::Set_down(bool _a) { this->down = _a; };
 void Player::Set_left(bool _a) { this->left = _a; };
@@ -20,9 +15,11 @@ void Player::Set_X_Y(int _X, int _Y)
 	this->X = (_X / 2) - this->Size;
 }
 
+//Get Coo. player
 int Player::Get_X() { return this->X; };
 int Player::Get_Y() { return this->Y; };
 
+//Get Main Window Param
 int Player::Get_W_H() { return this->_mHeight; };
 int Player::Get_W_W() { return this->_mWidth; };
 
@@ -38,15 +35,18 @@ void Player::Set_Movement_False() {
 }
 
 // Part of object
-void Player::Set_height(int _a) {
+void Player::Set_height(int _a)
+{
 	this->height = (int)((_a * sqrt(3)) / 2);
 };
+
+// Get height (not USe)
 int Player::Get_height() { return this->height; };
 
 // Move object
 void Player::Set_Move(int _a) { this->Move = _a; };
 
-
+//Main Function
 void Player::Update() {
 	// Check End_Window
 	if (this->X + this->Size > this->_mWidth - this->Move - 5)
