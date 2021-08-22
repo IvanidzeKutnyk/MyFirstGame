@@ -4,6 +4,9 @@ public:
 	Player(int _X, int _Y);
 	~Player() {};
 
+	int mass[2][2];
+	void FiilMass();
+
 	// Get player size 
 	int Get_Size();
 

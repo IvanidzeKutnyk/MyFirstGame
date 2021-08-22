@@ -74,9 +74,21 @@ void Player::Update() {
 
 
 }
+
+void Player::FiilMass() {
+
+	mass[0][0] = { 0 }; mass[0][1] = { 1 };
+	mass[1][0] = { 0 }; mass[1][1] = { 1 };
+}
+
 void Player::Draw(Color _color, Color** _ColorBuffer) {
+	float temp = Size / 2;
 	for (int i = 0; i < Size; i++)
 	{
+		if (temp == 0)
+		{
+			break;
+		}
 		for (int j = 0; j < Size; j++)
 		{
 			_ColorBuffer[Y + i][X + j] = _color;

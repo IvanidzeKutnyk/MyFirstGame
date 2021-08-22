@@ -39,6 +39,7 @@
     <ClCompile Include="src\Shot\Shot.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="About.txt" />
     <ClInclude Include="src\Application\Window.h" />
     <ClInclude Include="src\Enemy\Enemy.h" />
     <ClInclude Include="src\Figures\Ellipse.h" />

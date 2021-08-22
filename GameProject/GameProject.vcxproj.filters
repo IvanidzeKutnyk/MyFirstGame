@@ -62,6 +62,9 @@
     <ClInclude Include="src\GameWorld\GameWorld.h">
       <Filter>My_Game</Filter>
     </ClInclude>
+    <ClInclude Include="About.txt">
+      <Filter>Main</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">
